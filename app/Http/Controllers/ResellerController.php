@@ -56,7 +56,7 @@ class ResellerController extends Controller
             'wilayah' => $request->wilayah
         ]);
         alert()->success('Success','Data Berhasil Di Simpan !');
-        return redirect()->route('admin.resellers.index');
+        return redirect()->route('reseller.index');
     }
 
     public function show($id)

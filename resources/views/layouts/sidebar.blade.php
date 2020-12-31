@@ -34,6 +34,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('agen.index')}}" class=" waves-effect">
+                        <i class="mdi mdi-account-circle-outline"></i>
+                        <span>Data Agent</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('reseller.index')}}" class=" waves-effect">
                         <i class="mdi mdi-account-circle-outline"></i>
                         <span>Data Reseller</span>

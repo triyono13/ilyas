@@ -39,6 +39,8 @@ Route::post('login-status', 'QovexController@checkStatus');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@index')->name('index');
     Route::resource('/reseller', 'ResellerController');
+    Route::resource('/agen', 'AgenController');
     Route::resource('/gudang', 'GudangController');
     Route::resource('/transaksi', 'TransaksiController');
+    Route::get('/findPrice','TransaksiController@findPrice');
 });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Transaksi;
 use App\Reseller;
 use App\Gudang;
+use DB;
 
 class TransaksiController extends Controller
 {
@@ -31,8 +32,16 @@ class TransaksiController extends Controller
             'gudang_id' => $request->item,
             'tanggal' => $request->jumlah,
             'jumlah_item' => $request->tanggal,
+            'nominal' => $request->jumlah
         ]);
         alert()->success('Success','Data Berhasil Di Simpan !');
         return redirect()->back();
+    }
+
+    public function findPrice(Request $request)
+    {
+        $p=Gudang::select('harga')->where('id',$request->id)->first();
+    	return response()->json($p);
+
     }
 }

@@ -100,7 +100,7 @@
                     <div class="form-group">
                         <div class="col-lg-12">
                             <center><label>Nama Item</label></center>
-                            <select class="form-control select2" name="item" data-toggle="select2">
+                            <select class="form-control select2 productname" id="prod_cat_id" name="item" data-toggle="select2">
                                 <option value="">-- Pilih Item --</option>
                                 @foreach ($gudang as $result)
                                 <option value="{{$result->id}}">{{$result->nama_item}} - Rp. {{ number_format($result -> harga,0,',','.')}},-</option>
@@ -111,9 +111,16 @@
                     <div class="form-group">
                         <div class="col-lg-12">
                             <center><label>Jumlah Item</label></center>
-                            <input type="number" min="0" class="form-control" name="jumlah" placeholder="Jumlah Item" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+                            <input type="number" min="0" value ="0" class="form-control" name="jumlah" placeholder="Jumlah Item" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <center><label>Harga</label></center>
+                            <input type="text" class="form-control" name="harga" placeholder="0" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+                        </div>
+                    </div>
+                    <input type="text" class="prod_price">
                     <div class="form-group">
                         <div class="col-lg-12">
                             <center><label>Total Harga</label></center>
@@ -135,6 +142,36 @@
     
 @include('sweetalert::alert')
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+		$(document).on('change','.productname',function () {
+			var prod_id=$(this).val();
+
+			var a=$(this).parent();
+			console.log(prod_id);
+			var op="";
+			$.ajax({
+				type:'get',
+				url:'{!!URL::to('findPrice')!!}',
+				data:{'id':prod_id},
+				dataType:'json',//return data will be json
+				success:function(data){
+					console.log("harga");
+					console.log(data.harga);
+
+					// here price is coloumn name in products table data.coln name
+
+					a.find('.prod_price').val(data.harga);
+
+				},
+				error:function(){
+
+				}
+			});
+		});
+
+
+</script>
 
 @section('script')
 <script type="text/javascript" src="{{asset('libs/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
@@ -158,4 +195,5 @@
         });
     });
 </script>
+
 @endsection
