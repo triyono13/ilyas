@@ -14,6 +14,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <p class="mb-0"><br></span> {{$tanggal}}</p>
                     </div>
                 </div>
                    

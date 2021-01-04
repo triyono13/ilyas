@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th style="width:1%; text-align: center;">No.</th>
-                                <th style="width:5%; text-align: center;">Nama Reseller</th>
+                                <th style="width:5%; text-align: center;">Nama Agen</th>
                                 <th style="width:5; text-align: center;">Nama Item</th>
                                 <th style="width:5%; text-align: center;">Tanggal <br> Pembelian</th>
                                 <th style="width:5%; text-align: center;">Harga Barang</th>
@@ -41,17 +41,17 @@
                             <tr>
                             @foreach ($transaksi as $result => $hasil)
                                 <td>{{$result + $transaksi -> firstitem()}}</td>
-                                <td>{{$hasil ->reseller->nama}}</td>
+                                <td>{{$hasil ->agen->nama}}</td>
                                 <td>{{$hasil ->gudang->nama_item}}</td>
                                 <td>{{$hasil->tanggal}}</td>
                                 <td>Rp. {{ number_format($hasil ->gudang->harga,0,',','.')}},-</td>
                                 <td>{{$hasil->jumlah_items }}</td>
                                 <td>Rp. {{ number_format($hasil -> nominal,0,',','.')}},-</td>
                                 <td style="text-align: center;">
-                                    <form action="{{route('transaksi.destroy', $hasil->id)}}" method="POST">
+                                    <form action="{{route('transaksiagen.destroy', $hasil->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <a href="#" onclick="edit_kategori('{{route('transaksi.edit', $hasil->id)}}')" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Edit Transaksi" class="btn btn-primary btn-flat btn-sm">
+                                        <a href="#" onclick="edit_kategori('{{route('transaksiagen.edit', $hasil->id)}}')" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Edit Transaksi" class="btn btn-primary btn-flat btn-sm">
                                         <span class="dripicons dripicons-document"></span> Edit</a>
                                         <button type="submit" class="btn btn-danger btn-sm btn-flat" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Hapus Transaksi" onclick="return confirm('Yakin ingin menghapus data Transaksi ?')"><span class="dripicons dripicons-trash"> Hapus</span></button>
                                     </form>
@@ -78,7 +78,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" method="POST" action="{{route('transaksi.store')}}">
+                    <form class="form-horizontal" method="POST" action="{{route('transaksiagen.store')}}">
                     @csrf
                     <div class="form-group">
                         <div class="col-lg-12">
@@ -88,10 +88,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <center><label>Nama Reseller</label></center>
-                            <select class="form-control select2" name="reseller" data-toggle="select2">
-                                <option value="">-- Pilih Reseller --</option>
-                                @foreach ($reseller as $result)
+                            <center><label>Nama Agen</label></center>
+                            <select class="form-control select2" name="agen" data-toggle="select2">
+                                <option value="">-- Pilih Agen --</option>
+                                @foreach ($agen as $result)
                                 <option value="{{$result->id}}">{{$result->nama}}</option>
                                 @endforeach
                             </select>
@@ -160,7 +160,7 @@
 			var op="";
 			$.ajax({
 				type:'get',
-				url:'{!!URL::to('findPrice')!!}',
+				url:'{!!URL::to('findHarga')!!}',
 				data:{'id':prod_id},
 				dataType:'json',//return data will be json
 				success:function(data){

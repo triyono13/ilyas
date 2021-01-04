@@ -41,6 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/reseller', 'ResellerController');
     Route::resource('/agen', 'AgenController');
     Route::resource('/gudang', 'GudangController');
+    Route::resource('/gudangagen', 'GudangAgenController');
     Route::resource('/transaksi', 'TransaksiController');
+    Route::resource('/transaksiagen', 'TransaksiAgenController');
+    Route::get('/ganti', 'ChangeController@index')->name('ganti');
+    Route::post('/ganti', 'ChangeController@store')->name('change');
     Route::get('/findPrice','TransaksiController@findPrice');
+    Route::get('/findHarga','TransaksiAgenController@findHarga');
 });

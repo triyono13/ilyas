@@ -36,7 +36,7 @@
                 <li>
                     <a href="{{route('agen.index')}}" class=" waves-effect">
                         <i class="mdi mdi-account-circle-outline"></i>
-                        <span>Data Agent</span>
+                        <span>Data Agen</span>
                     </a>
                 </li>
                 <li>
@@ -52,9 +52,21 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('gudangagen.index')}}" class=" waves-effect">
+                        <i class="mdi mdi-notebook-outline"></i>
+                        <span>Data Gudang Agen</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('transaksi.index')}}" class=" waves-effect">
                         <i class="mdi mdi-cart"></i>
                         <span>Data Transaksi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('transaksiagen.index')}}" class=" waves-effect">
+                        <i class="mdi mdi-cart"></i>
+                        <span>Data Transaksi Agen</span>
                     </a>
                 </li>
                 <li>
@@ -64,13 +76,13 @@
                     </a>
                 </li><hr>
                 <li>
-                    <a href="#" class=" waves-effect">
+                    <a href="{{route('ganti')}}" class=" waves-effect">
                         <i class="mdi mdi-lock"></i>
                         <span>Ganti Password</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class=" waves-effect">
+                    <a href="{{route ('logout')}}" class=" waves-effect">
                         <i class="mdi mdi-logout"></i>
                         <span>Logout</span>
                     </a>

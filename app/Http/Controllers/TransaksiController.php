@@ -24,18 +24,57 @@ class TransaksiController extends Controller
             'reseller' => 'required',
             'item' => 'required',
             'jumlah' => 'required',
-            'tanggal' => 'required'
+            'tanggal' => 'required',
+            'total' => 'required'
         ]);
 
         $transaksi = Transaksi::create([
             'reseller_id' => $request->reseller,
             'gudang_id' => $request->item,
-            'tanggal' => $request->jumlah,
-            'jumlah_item' => $request->tanggal,
-            'nominal' => $request->jumlah
+            'tanggal' => date("Y-m-d", strtotime($request->tanggal)),
+            'jumlah_items' => $request->jumlah,
+            'nominal' => $request->total
         ]);
         alert()->success('Success','Data Berhasil Di Simpan !');
         return redirect()->back();
+    }
+    
+    public function edit($id)
+    {
+        $gudang = Gudang::all();
+        $reseller = Reseller::all();
+        $transaksi = Transaksi::find($id);
+        return view ('admin.transaksi.edit', compact('transaksi', 'gudang','reseller'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'reseller' => 'required',
+            'item' => 'required',
+            'jumlah' => 'required',
+            'tanggal' => 'required',
+            'total' => 'required'
+        ]);
+
+        $transaksi_data = [
+            'reseller_id' => $request->reseller,
+            'gudang_id' => $request->item,
+            'tanggal' => date("Y-m-d", strtotime($request->tanggal)),
+            'jumlah_items' => $request->jumlah,
+            'nominal' => $request->total
+        ];
+
+        Transaksi::whereId($id)->update($transaksi_data);
+        alert()->success('Success','Data Berhasil Di Update !');
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {   
+        $transaksi = Transaksi::find($id);
+        $transaksi->delete();
+        return redirect()->back()->with('success', 'Item berhasil di Hapus');
     }
 
     public function findPrice(Request $request)
